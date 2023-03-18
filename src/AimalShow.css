@@ -1,0 +1,21 @@
+.animal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: auto;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0px 3px 4px 3px lightgrey;
+  position: relative;
+  margin: 1rem;
+}
+
+.size {
+  width: 100px;
+}
+
+.heart {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
