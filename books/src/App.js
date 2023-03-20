@@ -7,20 +7,36 @@ function App() {
   const [newBook, setNewBook] = useState(false);
   const [books, setBooks] = useState([]);
 
-  const getBookTitle = (title) => {
+  const getBookTitle = (title, id) => {
     setName(title);
-    setBooks([...books, title]);
+    setBooks([
+      ...books,
+      {
+        title,
+        id,
+      },
+    ]);
 
     if (title) {
       setNewBook(true);
     }
   };
 
-  console.log(books);
+  const handleUpdatedList = (list) => {
+    setBooks(list);
+  };
 
   return (
     <div className="App">
-      <BookList title={name} newBook={newBook} showBook={setNewBook} />
+      <BookList
+        title={name}
+        newBook={newBook}
+        showBook={setNewBook}
+        lists={books}
+        setBooks={handleUpdatedList}
+        setName={setName}
+      />
+      <h2>Please your favorite books</h2>
       <AddBooks getTitle={getBookTitle} />
     </div>
   );

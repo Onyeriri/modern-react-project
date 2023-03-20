@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Book({ title, newBook, showBook }) {
+function Book({ list, handleDelete }) {
   const [edit, setEdit] = useState(false);
   const [name, setName] = useState("");
 
@@ -16,33 +16,23 @@ function Book({ title, newBook, showBook }) {
     setEdit(false);
   };
 
-  const handleDelete = () => {
-    showBook(false);
-  };
-
-  console.log(title);
-
   return (
     <div>
-      {newBook ? (
-        <div>
-          <span onClick={handleEdit}>edit</span>
-          <span onClick={handleDelete}>delete</span>
-          <br />
-          <img src="" alt="Book" />
-          <h2>{name !== "" ? name : title}</h2>
-          <br />
+      <div>
+        <span onClick={handleEdit}>edit</span>
+        <span onClick={() => handleDelete(list.id)}>delete</span>
+        <br />
+        <img src="" alt="Book" />
+        <h2>{name === "" ? list.title : name}</h2>
+        <br />
 
-          {edit && (
-            <div>
-              <input value={name} onChange={handleChange} type="text" />
-              <button onClick={handleSave}>save</button>
-            </div>
-          )}
-        </div>
-      ) : (
-        <h1>No Book to display, add books</h1>
-      )}
+        {edit && (
+          <div>
+            <input value={name} onChange={handleChange} type="text" />
+            <button onClick={handleSave}>save</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
