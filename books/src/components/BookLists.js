@@ -6,7 +6,7 @@ function BookList({ title, newBook, showBook, lists, setBooks, setName }) {
 
     setBooks(newLists);
 
-    if (lists.length - 1 === 0) showBook(false);
+    if (newLists.length === 0) showBook(false);
   }
 
   const renderedBooks = lists.map((list, index) => {
