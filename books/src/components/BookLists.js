@@ -23,11 +23,14 @@ function BookList({ title, newBook, showBook, lists, setBooks, setName }) {
       />
     );
   });
-  return (
-    <div>
-      {newBook ? renderedBooks : <h1>No Book to display, add books</h1>}
-    </div>
+
+  const displayBook = newBook ? (
+    renderedBooks
+  ) : (
+    <h1>No Book to display, add books</h1>
   );
+
+  return <div>{displayBook}</div>;
 }
 
 export default BookList;
