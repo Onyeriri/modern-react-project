@@ -1,35 +1,41 @@
 import { useState } from "react";
 
-function Book({ list, handleDelete }) {
-  const [edit, setEdit] = useState(false);
-  const [name, setName] = useState("");
+function Book({ book, onSaveBooks, books, onEdit }) {
+  const [isEdit, setIsEdit] = useState(true);
+  const [newTitle, setNewTitle] = useState("");
 
-  const handleEdit = (e) => {
-    setEdit(true);
-  };
+  function handleChange(e) {
+    setNewTitle(e.target.value);
+  }
 
-  const handleChange = (e) => {
-    setName(e.target.value);
-  };
+  onEdit(newTitle, book.id);
+  // function handleEdit() {
+  //   const editedTitle = { ...book, title: newTitle };
+  //   console.log(editedTitle);
 
-  const handleSave = () => {
-    setEdit(false);
-  };
+  //   onSaveBooks([...books, editedTitle]);
+  // }
+
+  // function handleClick() {
+  //   // setNewTitle(newTitle);
+  // }
 
   return (
     <div>
       <div>
-        <span onClick={handleEdit}>edit</span>
-        <span onClick={() => handleDelete(list.id)}>delete</span>
+        <span>edit</span>
+        <span>delete</span>
         <br />
         <img src="" alt="Book" />
-        <h2>{name === "" ? list.title : name}</h2>
+        <h2>{book.title}</h2>
         <br />
 
-        {edit && (
+        {isEdit && (
           <div>
-            <input value={name} onChange={handleChange} type="text" />
-            <button onClick={handleSave}>save</button>
+            <input value={newTitle} type="text" onChange={handleChange} />
+            <button onClick={(newTitle, id) => onEdit(newTitle, id)}>
+              save
+            </button>
           </div>
         )}
       </div>

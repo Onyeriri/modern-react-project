@@ -1,33 +1,28 @@
 import Book from "./Book";
 
-function BookList({ title, newBook, showBook, lists, setBooks, setName }) {
-  function handleDelete(id) {
-    const newLists = lists.filter((list) => list.id !== id);
-
-    setBooks(newLists);
-
-    if (newLists.length === 0) showBook(false);
-  }
-
-  const renderedBooks = lists.map((list, index) => {
+function BookList({ isBookEmpty, setBookEmpty, books, setBooks }) {
+  const renderedBooks = books.map((book, index) => {
     return (
       <Book
-        title={title}
-        newBook={newBook}
-        showBook={showBook}
-        list={list}
+        onSaveBooks={setBooks}
+        books={books}
+        book={book}
         key={index}
-        id={index}
-        setName={setName}
-        handleDelete={handleDelete}
+        onEdit={handleEdit}
       />
     );
   });
 
-  const displayBook = newBook ? (
-    renderedBooks
-  ) : (
+  function handleEdit(newTitle, id) {
+    setBooks([...books, { title: newTitle, id: id }]);
+
+    console.log(books);
+  }
+
+  const displayBook = isBookEmpty ? (
     <h1>No Book to display, add books</h1>
+  ) : (
+    renderedBooks
   );
 
   return <div>{displayBook}</div>;

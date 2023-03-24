@@ -3,41 +3,32 @@ import AddBooks from "./components/AddBooks";
 import BookList from "./components/BookLists";
 
 function App() {
-  const [name, setName] = useState("");
-  const [newBook, setNewBook] = useState(false);
+  const [isBookEmpty, setBookEmpty] = useState(true);
   const [books, setBooks] = useState([]);
 
-  const getBookTitle = (title, id) => {
-    setName(title);
-    setBooks([
-      ...books,
-      {
-        title,
-        id,
-      },
-    ]);
-
-    if (title) {
-      setNewBook(true);
+  const createBook = (title, id) => {
+    if (!title) {
+      return;
     }
+
+    const newBook = [...books, { title, id }];
+
+    setBooks(newBook);
+    setBookEmpty(!isBookEmpty);
   };
 
-  const handleUpdatedList = (list) => {
-    setBooks(list);
-  };
+  console.log(books);
 
   return (
     <div className="App">
       <BookList
-        title={name}
-        newBook={newBook}
-        showBook={setNewBook}
-        lists={books}
-        setBooks={handleUpdatedList}
-        setName={setName}
+        isBookEmpty={isBookEmpty}
+        setBookEmpty={setBookEmpty}
+        books={books}
+        setBooks={setBooks}
       />
       <h2>Please your favorite books</h2>
-      <AddBooks getTitle={getBookTitle} />
+      <AddBooks onSubmit={createBook} />
     </div>
   );
 }

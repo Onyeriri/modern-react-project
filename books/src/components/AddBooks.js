@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-function AddBooks({ getTitle }) {
+function AddBooks({ onSubmit }) {
   const [title, setTitle] = useState("");
   const [id, setId] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setId(id + 1);
 
-    getTitle(title, id);
+    onSubmit(title, id);
+    setId(id + 1);
     setTitle("");
   };
 
