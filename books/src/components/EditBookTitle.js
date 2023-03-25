@@ -1,15 +1,14 @@
 import { useState } from "react";
 
-function EditBookTitle({ onEdit, book, onSave, isEdit }) {
-  const [newTitle, setNewTitle] = useState("");
+function EditBookTitle({ onEdit, book }) {
+  const [newTitle, setNewTitle] = useState(book.title);
 
   function handleChange(e) {
     setNewTitle(e.target.value);
   }
 
   function handleClick() {
-    onEdit(newTitle, book.id);
-    onSave(false);
+    onEdit(newTitle);
   }
 
   return (

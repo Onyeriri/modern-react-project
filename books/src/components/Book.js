@@ -9,8 +9,15 @@ function Book({ book, onDelete, onEdit }) {
   }
 
   function handleEdit() {
-    setIsEdit(true);
+    setIsEdit(!isEdit);
   }
+
+  function handleSubmit(title) {
+    onEdit(title, book.id);
+    setIsEdit(!isEdit);
+  }
+
+  let url = `https://picsum.photos/seed/${book.id}/200/300`;
 
   return (
     <div>
@@ -18,13 +25,13 @@ function Book({ book, onDelete, onEdit }) {
         <span onClick={handleEdit}>edit</span>
         <span onClick={handleDeleteBook}>delete</span>
         <br />
-        <img src="" alt="Book" />
+        <img src={url} alt="Books" />
         <h2>{book.title}</h2>
         <br />
 
         {isEdit && (
           <EditBookTitle
-            onEdit={onEdit}
+            onEdit={handleSubmit}
             book={book}
             onSave={setIsEdit}
             isEdit={isEdit}
