@@ -50,7 +50,7 @@ function App() {
   };
 
   // Edit the title of a particular component by id
-  function handleEdit(newTitle, id) {
+  async function handleEdit(newTitle, id) {
     const editedTitle = books.map((book) => {
       if (book.id === id) {
         return { ...book, title: newTitle };
@@ -58,6 +58,12 @@ function App() {
 
       return book;
     });
+
+    await axios.put(`http://127.0.0.1:3001/books/${id}`, {
+      title: newTitle,
+    });
+
+    getBooks();
 
     setBooks(editedTitle);
   }
@@ -68,9 +74,7 @@ function App() {
       return book.id !== deleteBook.id;
     });
 
-    const response = await axios.delete(
-      `http://127.0.0.1:3001/books/${deleteBook.id}`
-    );
+    await axios.delete(`http://127.0.0.1:3001/books/${deleteBook.id}`);
 
     getBooks();
 
