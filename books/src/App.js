@@ -6,6 +6,7 @@ function App() {
   const [isBookEmpty, setBookEmpty] = useState(true);
   const [books, setBooks] = useState([]);
 
+  // create a new book and add to book array
   const createBook = (title, id) => {
     if (!title) {
       return;
@@ -18,6 +19,7 @@ function App() {
     if (newBook.length !== 0) setBookEmpty(false);
   };
 
+  // Edit the title of a particular component by id
   function handleEdit(newTitle, id) {
     const editedTitle = books.map((book, index) => {
       if (index === id) {
@@ -30,6 +32,7 @@ function App() {
     setBooks(editedTitle);
   }
 
+  // delete a particular book using a particular book
   function handleDelete(deleteBook) {
     const filteredBooks = books.filter((book) => book.id !== deleteBook.id);
 
