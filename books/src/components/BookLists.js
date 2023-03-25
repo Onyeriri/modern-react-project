@@ -14,9 +14,15 @@ function BookList({ isBookEmpty, setBookEmpty, books, setBooks }) {
   });
 
   function handleEdit(newTitle, id) {
-    setBooks([...books, { title: newTitle, id: id }]);
+    const editedTitle = books.map((book, index) => {
+      if (index === id) {
+        return { ...book, title: newTitle };
+      }
 
-    console.log(books);
+      return book;
+    });
+
+    setBooks(editedTitle);
   }
 
   const displayBook = isBookEmpty ? (

@@ -1,14 +1,26 @@
 import { useState } from "react";
 
 function Book({ book, onSaveBooks, books, onEdit }) {
-  const [isEdit, setIsEdit] = useState(true);
+  const [isEdit, setIsEdit] = useState(false);
   const [newTitle, setNewTitle] = useState("");
 
   function handleChange(e) {
     setNewTitle(e.target.value);
   }
 
-  onEdit(newTitle, book.id);
+  function handleEdit() {
+    setIsEdit(!isEdit);
+  }
+
+  function handleClick() {
+    onEdit(newTitle, book.id);
+    setIsEdit(!isEdit);
+  }
+
+  // console.log(newTitle);
+  // console.log(book.id);
+
+  // onEdit(newTitle, book.id);
   // function handleEdit() {
   //   const editedTitle = { ...book, title: newTitle };
   //   console.log(editedTitle);
@@ -23,7 +35,7 @@ function Book({ book, onSaveBooks, books, onEdit }) {
   return (
     <div>
       <div>
-        <span>edit</span>
+        <span onClick={handleEdit}>edit</span>
         <span>delete</span>
         <br />
         <img src="" alt="Book" />
@@ -33,9 +45,7 @@ function Book({ book, onSaveBooks, books, onEdit }) {
         {isEdit && (
           <div>
             <input value={newTitle} type="text" onChange={handleChange} />
-            <button onClick={(newTitle, id) => onEdit(newTitle, id)}>
-              save
-            </button>
+            <button onClick={handleClick}>save</button>
           </div>
         )}
       </div>
