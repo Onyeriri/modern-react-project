@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function Book({ book, onSaveBooks, books, onEdit }) {
+function Book({ book, onDelete, onEdit }) {
   const [isEdit, setIsEdit] = useState(false);
   const [newTitle, setNewTitle] = useState("");
 
@@ -10,6 +10,10 @@ function Book({ book, onSaveBooks, books, onEdit }) {
 
   function handleEdit() {
     setIsEdit(!isEdit);
+  }
+
+  function handleDeleteBook() {
+    onDelete(book);
   }
 
   function handleClick() {
@@ -36,7 +40,7 @@ function Book({ book, onSaveBooks, books, onEdit }) {
     <div>
       <div>
         <span onClick={handleEdit}>edit</span>
-        <span>delete</span>
+        <span onClick={handleDeleteBook}>delete</span>
         <br />
         <img src="" alt="Book" />
         <h2>{book.title}</h2>

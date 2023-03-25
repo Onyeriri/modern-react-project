@@ -14,7 +14,8 @@ function App() {
     const newBook = [...books, { title, id }];
 
     setBooks(newBook);
-    setBookEmpty(!isBookEmpty);
+
+    if (newBook.length !== 0) setBookEmpty(false);
   };
 
   console.log(books);

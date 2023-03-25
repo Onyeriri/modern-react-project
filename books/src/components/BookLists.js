@@ -4,14 +4,25 @@ function BookList({ isBookEmpty, setBookEmpty, books, setBooks }) {
   const renderedBooks = books.map((book, index) => {
     return (
       <Book
-        onSaveBooks={setBooks}
-        books={books}
         book={book}
         key={index}
         onEdit={handleEdit}
+        onDelete={handleDelete}
       />
     );
   });
+
+  function handleDelete(deleteBook) {
+    const filteredBooks = books.filter((book) => book.id !== deleteBook.id);
+
+    setBooks(filteredBooks);
+
+    if (filteredBooks.length === 0) {
+      setBookEmpty(true);
+    }
+
+    // console.log(id);
+  }
 
   function handleEdit(newTitle, id) {
     const editedTitle = books.map((book, index) => {
