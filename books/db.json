@@ -1,44 +1,8 @@
 {
   "books": [
     {
-      "title": "The Girl with a Dragon Tattoo",
+      "title": "The Girl with the Dragon Tattoo",
       "id": 1
-    },
-    {
-      "title": "Man of War",
-      "id": 2
-    },
-    {
-      "title": "ll",
-      "id": 3
-    },
-    {
-      "title": "pp",
-      "id": 4
-    },
-    {
-      "title": "kkkk",
-      "id": 5
-    },
-    {
-      "title": "",
-      "id": 6
-    },
-    {
-      "title": "www",
-      "id": 7
-    },
-    {
-      "title": "lol",
-      "id": 8
-    },
-    {
-      "title": "opo",
-      "id": 9
-    },
-    {
-      "title": "hello",
-      "id": 10
     }
   ]
 }
