@@ -1,40 +1,16 @@
+import EditBookTitle from "./EditBookTitle";
 import { useState } from "react";
 
 function Book({ book, onDelete, onEdit }) {
   const [isEdit, setIsEdit] = useState(false);
-  const [newTitle, setNewTitle] = useState("");
-
-  function handleChange(e) {
-    setNewTitle(e.target.value);
-  }
-
-  function handleEdit() {
-    setIsEdit(!isEdit);
-  }
 
   function handleDeleteBook() {
     onDelete(book);
   }
 
-  function handleClick() {
-    onEdit(newTitle, book.id);
-    setIsEdit(!isEdit);
+  function handleEdit() {
+    setIsEdit(true);
   }
-
-  // console.log(newTitle);
-  // console.log(book.id);
-
-  // onEdit(newTitle, book.id);
-  // function handleEdit() {
-  //   const editedTitle = { ...book, title: newTitle };
-  //   console.log(editedTitle);
-
-  //   onSaveBooks([...books, editedTitle]);
-  // }
-
-  // function handleClick() {
-  //   // setNewTitle(newTitle);
-  // }
 
   return (
     <div>
@@ -47,10 +23,12 @@ function Book({ book, onDelete, onEdit }) {
         <br />
 
         {isEdit && (
-          <div>
-            <input value={newTitle} type="text" onChange={handleChange} />
-            <button onClick={handleClick}>save</button>
-          </div>
+          <EditBookTitle
+            onEdit={onEdit}
+            book={book}
+            onSave={setIsEdit}
+            isEdit={isEdit}
+          />
         )}
       </div>
     </div>
