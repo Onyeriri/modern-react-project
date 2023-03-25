@@ -1,28 +1,56 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddBooks from "./components/AddBooks";
 import BookList from "./components/BookLists";
+import axios from "axios";
 
 function App() {
-  const [isBookEmpty, setBookEmpty] = useState(true);
+  const [isBookEmpty, setIsBookEmpty] = useState(false);
   const [books, setBooks] = useState([]);
 
+  const getBooks = async () => {
+    const response = await axios.get("http://127.0.0.1:3001/books");
+
+    setBooks(response.data);
+
+    if (books.length !== 0) {
+      setIsBookEmpty(true);
+      // console.log(typeof books.length);
+    }
+
+    // // setIsBookEmpty(false);
+    // console.log(books.length);
+  };
+
+  useEffect(() => {
+    getBooks();
+  }, []);
+
+  // console.log(books);
+
   // create a new book and add to book array
-  const createBook = (title, id) => {
+  const createBook = async (title) => {
     if (!title) {
       return;
     }
+    // const newBook = [
+    //   ...books,
+    //   { title, id: Math.floor(Math.random() * 999999) },
+    // ];
+    // setBooks(newBook);
 
-    const newBook = [...books, { title, id }];
+    setIsBookEmpty(false);
 
-    setBooks(newBook);
+    const response = await axios.post("http://127.0.0.1:3001/books", {
+      title,
+    });
 
-    if (newBook.length !== 0) setBookEmpty(false);
+    return response;
   };
 
   // Edit the title of a particular component by id
   function handleEdit(newTitle, id) {
-    const editedTitle = books.map((book, index) => {
-      if (index === id) {
+    const editedTitle = books.map((book) => {
+      if (book.id === id) {
         return { ...book, title: newTitle };
       }
 
@@ -39,7 +67,7 @@ function App() {
     setBooks(filteredBooks);
 
     if (filteredBooks.length === 0) {
-      setBookEmpty(true);
+      setIsBookEmpty(true);
     }
   }
 
@@ -47,7 +75,7 @@ function App() {
     <div className="App">
       <BookList
         isBookEmpty={isBookEmpty}
-        setBookEmpty={setBookEmpty}
+        setBookEmpty={setIsBookEmpty}
         onDelete={handleDelete}
         onEdit={handleEdit}
         books={books}
