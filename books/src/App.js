@@ -12,7 +12,7 @@ function App() {
 
     setBooks(response.data);
 
-    if (books.length !== 0) {
+    if (response.data.length === 0) {
       setIsBookEmpty(true);
       // console.log(typeof books.length);
     }
@@ -44,6 +44,8 @@ function App() {
       title,
     });
 
+    getBooks();
+
     return response;
   };
 
@@ -60,14 +62,22 @@ function App() {
     setBooks(editedTitle);
   }
 
-  // delete a particular book using a particular book
-  function handleDelete(deleteBook) {
-    const filteredBooks = books.filter((book) => book.id !== deleteBook.id);
+  // delete a particular book using an id
+  async function handleDelete(deleteBook) {
+    const filteredBooks = books.filter((book) => {
+      return book.id !== deleteBook.id;
+    });
 
-    setBooks(filteredBooks);
+    const response = await axios.delete(
+      `http://127.0.0.1:3001/books/${deleteBook.id}`
+    );
+
+    getBooks();
+
+    setBooks(books);
 
     if (filteredBooks.length === 0) {
-      setIsBookEmpty(true);
+      // setIsBookEmpty(true);
     }
   }
 
