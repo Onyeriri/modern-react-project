@@ -6,9 +6,10 @@ import axios from "axios";
 function App() {
   const [isBookEmpty, setIsBookEmpty] = useState(false);
   const [books, setBooks] = useState([]);
+  let url = `http://127.0.0.1:3001/books`;
 
   const getBooks = async () => {
-    const response = await axios.get("http://127.0.0.1:3001/books");
+    const response = await axios.get(url);
 
     setBooks(response.data);
 
@@ -40,7 +41,7 @@ function App() {
 
     setIsBookEmpty(false);
 
-    const response = await axios.post("http://127.0.0.1:3001/books", {
+    const response = await axios.post(url, {
       title,
     });
 
@@ -51,16 +52,15 @@ function App() {
 
   // Edit the title of a particular component by id
   async function handleEdit(newTitle, id) {
+    const response = await axios.put(url + `/${id}`, {
+      title: newTitle,
+    });
     const editedTitle = books.map((book) => {
       if (book.id === id) {
-        return { ...book, title: newTitle };
+        return { ...book, ...response.data };
       }
 
       return book;
-    });
-
-    await axios.put(`http://127.0.0.1:3001/books/${id}`, {
-      title: newTitle,
     });
 
     getBooks();
@@ -74,15 +74,15 @@ function App() {
       return book.id !== deleteBook.id;
     });
 
-    await axios.delete(`http://127.0.0.1:3001/books/${deleteBook.id}`);
+    await axios.delete(url + `/${deleteBook.id}`);
 
     getBooks();
 
-    setBooks(books);
+    setBooks(filteredBooks);
 
-    if (filteredBooks.length === 0) {
-      // setIsBookEmpty(true);
-    }
+    // if (filteredBooks.length === 0) {
+    //   // setIsBookEmpty(true);
+    // }
   }
 
   return (
