@@ -1,9 +1,8 @@
 import Book from "./Book";
-import { useContext } from "react";
-import BooksContext from "../context/Books";
+import useBookContext from "../hooks/use-book-context";
 
 function BookList({ isBookEmpty, onDelete, onEdit }) {
-  const { fsbooks } = useContext(BooksContext);
+  const { fsbooks } = useBookContext();
 
   const renderedBooks = fsbooks.map((book) => {
     return (
