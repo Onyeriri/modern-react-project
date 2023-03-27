@@ -26,28 +26,20 @@ import { createContext } from "react";
 const BooksContext = createContext();
 
 export function Provider({ children }) {
-  const [books, setBooks] = useState([]);
+  const [fsbooks, setFsBooks] = useState([]);
 
   async function getAllBooks() {
     const response = await axios.get(`http://localhost:3001/books`);
 
-    const data = {
-      ...books,
-      ...response.data,
-    };
-
-    setBooks(data);
-
-    console.log(response.data);
-    console.log([data]);
+    setFsBooks(response.data);
   }
 
-  async function editBooksById(id, newTitle) {
+  async function editBookById(newTitle, id) {
     const response = await axios.put(`http://localhost:3001/books/${id}`, {
       title: newTitle,
     });
 
-    const updatedBook = books.map((book) => {
+    const updatedBook = fsbooks.map((book) => {
       if (book.id === id) {
         return { ...book, title: response.data.title };
       }
@@ -55,15 +47,15 @@ export function Provider({ children }) {
       return book;
     });
 
-    setBooks(updatedBook);
+    setFsBooks(updatedBook);
   }
 
-  async function deleteBookById(id) {
-    const filteredBooks = books.filter((book) => book.id !== id);
+  async function deleteBookById(bookId) {
+    const filteredBooks = fsbooks.filter((book) => book.id !== bookId.id);
 
-    await axios.delete(`http://localhost:3001/books/${id}`);
+    await axios.delete(`http://localhost:3001/books/${bookId.id}`);
 
-    setBooks(filteredBooks);
+    setFsBooks(filteredBooks);
   }
 
   async function createBook(title) {
@@ -71,14 +63,14 @@ export function Provider({ children }) {
       title,
     });
 
-    setBooks([...books, response.data]);
+    setFsBooks([...fsbooks, response.data]);
 
-    console.log(books);
+    console.log(fsbooks);
   }
 
   const allocateBooks = {
-    books,
-    editBooksById,
+    fsbooks,
+    editBookById,
     deleteBookById,
     createBook,
     getAllBooks,

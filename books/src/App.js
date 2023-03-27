@@ -1,101 +1,107 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import AddBooks from "./components/AddBooks";
 import BookList from "./components/BookLists";
 import axios from "axios";
+import BooksContext from "./context/Books";
 
 function App() {
   const [isBookEmpty, setIsBookEmpty] = useState(false);
   const [books, setBooks] = useState([]);
   let url = `http://127.0.0.1:3001/books`;
 
-  const getBooks = async () => {
-    const response = await axios.get(url);
+  const { getAllBooks, fsbooks } = useContext(BooksContext);
 
-    setBooks(response.data);
+  // const getBooks = async () => {
+  //   const response = await axios.get(url);
 
-    if (response.data.length === 0) {
-      setIsBookEmpty(true);
-      // console.log(typeof books.length);
-    }
+  //   setBooks(response.data);
 
-    // // setIsBookEmpty(false);
-    // console.log(books.length);
-  };
+  //   if (response.data.length === 0) {
+  //     setIsBookEmpty(true);
+  //     // console.log(typeof books.length);
+  //   }
+
+  //   // // setIsBookEmpty(false);
+  //   // console.log(books.length);
+  // };
 
   useEffect(() => {
     // getBooks();
+    // getAllBooks();
   }, []);
+
+  // console.log(fsbooks);
 
   // console.log(books);
 
   // create a new book and add to book array
-  const createBook = async (title) => {
-    if (!title) {
-      return;
-    }
-    // const newBook = [
-    //   ...books,
-    //   { title, id: Math.floor(Math.random() * 999999) },
-    // ];
-    // setBooks(newBook);
+  // const createBook = async (title) => {
+  //   if (!title) {
+  //     return;
+  //   }
+  //   // const newBook = [
+  //   //   ...books,
+  //   //   { title, id: Math.floor(Math.random() * 999999) },
+  //   // ];
+  //   // setBooks(newBook);
 
-    setIsBookEmpty(false);
+  //   setIsBookEmpty(false);
 
-    const response = await axios.post(url, {
-      title,
-    });
+  //   const response = await axios.post(url, {
+  //     title,
+  //   });
 
-    getBooks();
+  //   // getBooks();
 
-    return response;
-  };
+  //   return response;
+  // };
 
   // Edit the title of a particular component by id
-  async function handleEdit(newTitle, id) {
-    const response = await axios.put(url + `/${id}`, {
-      title: newTitle,
-    });
-    const editedTitle = books.map((book) => {
-      if (book.id === id) {
-        return { ...book, ...response.data };
-      }
+  // async function handleEdit(newTitle, id) {
+  //   const response = await axios.put(url + `/${id}`, {
+  //     title: newTitle,
+  //   });
+  //   const editedTitle = books.map((book) => {
+  //     if (book.id === id) {
+  //       return { ...book, ...response.data };
+  //     }
 
-      return book;
-    });
+  //     return book;
+  //   });
 
-    getBooks();
+  //   // getBooks();
 
-    setBooks(editedTitle);
-  }
+  //   setBooks(editedTitle);
+  // }
 
   // delete a particular book using an id
-  async function handleDelete(deleteBook) {
-    const filteredBooks = books.filter((book) => {
-      return book.id !== deleteBook.id;
-    });
+  // async function handleDelete(deleteBook) {
+  //   const filteredBooks = books.filter((book) => {
+  //     return book.id !== deleteBook.id;
+  //   });
 
-    await axios.delete(url + `/${deleteBook.id}`);
+  //   await axios.delete(url + `/${deleteBook.id}`);
 
-    getBooks();
+  //   // getBooks();
 
-    setBooks(filteredBooks);
+  //   setBooks(filteredBooks);
 
-    // if (filteredBooks.length === 0) {
-    //   // setIsBookEmpty(true);
-    // }
-  }
+  //   // if (filteredBooks.length === 0) {
+  //   //   // setIsBookEmpty(true);
+  //   // }
+  // }
 
   return (
     <div className="App">
       <BookList
         isBookEmpty={isBookEmpty}
         setBookEmpty={setIsBookEmpty}
-        onDelete={handleDelete}
-        onEdit={handleEdit}
-        books={books}
+        // onDelete={handleDelete}
+        // onEdit={handleEdit}
+        // books={books}
       />
       <h2>Please your favorite books</h2>
-      <AddBooks onSubmit={createBook} />
+      <AddBooks />
     </div>
   );
 }
