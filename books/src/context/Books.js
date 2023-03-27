@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { createContext } from "react";
 
 const BooksContext = createContext();
@@ -7,11 +7,11 @@ const BooksContext = createContext();
 export function Provider({ children }) {
   const [fsbooks, setFsBooks] = useState([]);
 
-  async function getAllBooks() {
+  const getAllBooks = useCallback(async () => {
     const response = await axios.get(`http://localhost:3001/books`);
 
     setFsBooks(response.data);
-  }
+  }, []);
 
   async function editBookById(newTitle, id) {
     const response = await axios.put(`http://localhost:3001/books/${id}`, {
