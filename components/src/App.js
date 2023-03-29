@@ -3,8 +3,9 @@ import Button from "./Button";
 function App() {
   return (
     <div>
+      <h1 className="text-3xl font-bold underline">Hello tailwind</h1>
       <div>
-        <Button success danger rounded outline>
+        <Button success rounded outline>
           Primary
         </Button>
       </div>
