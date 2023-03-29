@@ -1,4 +1,5 @@
 import propTypes from "prop-types";
+import classNames from "classnames";
 
 function Button({
   children,
@@ -10,7 +11,18 @@ function Button({
   outline,
   rounded,
 }) {
-  return <button>{children}</button>;
+  const finalCss = classNames("px-4", {
+    "bg-blue-300": true,
+    "bg-yellow-300": false,
+  });
+
+  console.log(finalCss);
+
+  return (
+    <button className="px-3 py-5 border border-blue-600 bg-blue-500 text-white">
+      {children}
+    </button>
+  );
 }
 
 Button.propTypes = {
