@@ -1,64 +1,30 @@
-import Button from "./Button";
-import {
-  FaAirbnb,
-  FaAffiliatetheme,
-  FaAlgolia,
-  FaBattleNet,
-  FaBuffer,
-  FaCottonBureau,
-  FaDelicious,
-} from "react-icons/fa";
+import Accordion from "./components/Accordion";
 
 function App() {
-  const handleClick = () => {
-    console.log("Clicked!!!");
-  };
+  const items = [
+    {
+      id: "jkl",
+      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      content:
+        "Quibusdam dolores veniam commodi dolor? Consequatur cumque sit adipisci molestiae quibusdam. Blanditiis animi voluptas unde vitae odit nesciunt possimus quaerat in culpa!",
+    },
+    {
+      id: "jklp",
+      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      content:
+        "Quibusdam dolores veniam commodi dolor? Consequatur cumque sit adipisci molestiae quibusdam. Blanditiis animi voluptas unde vitae odit nesciunt possimus quaerat in culpa!",
+    },
+    {
+      id: "jkld",
+      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      content:
+        "Quibusdam dolores veniam commodi dolor? Consequatur cumque sit adipisci molestiae quibusdam. Blanditiis animi voluptas unde vitae odit nesciunt possimus quaerat in culpa!",
+    },
+  ];
 
   return (
     <div>
-      <h1 className="text-3xl font-bold underline">Hello tailwind</h1>
-      <div>
-        <Button onClick={handleClick} success outline rounded>
-          <FaAirbnb />
-          Success outline rounded
-        </Button>
-      </div>
-      <div>
-        <Button danger>
-          <FaAffiliatetheme />
-          Danger outline
-        </Button>
-      </div>
-      <div>
-        <Button warning>
-          <FaAlgolia />
-          Warning
-        </Button>
-      </div>
-      <div>
-        <Button danger rounded outline>
-          <FaBattleNet />
-          secondary rounded outline
-        </Button>
-      </div>
-      <div>
-        <Button secondary rounded>
-          <FaBuffer />
-          secondary rounded
-        </Button>
-      </div>
-      <div>
-        <Button primary outline>
-          <FaCottonBureau />
-          primary button
-        </Button>
-      </div>
-      <div>
-        <Button danger outline rounded>
-          <FaDelicious />
-          primary button
-        </Button>
-      </div>
+      <Accordion items={items} />
     </div>
   );
 }
