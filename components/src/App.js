@@ -6,29 +6,29 @@ function App() {
       <h1 className="text-3xl font-bold underline">Hello tailwind</h1>
       <div>
         <Button success rounded outline>
-          Primary
+          Success rounded outline
         </Button>
       </div>
       <div>
         <Button danger outline>
-          Secondary
+          Danger outline
         </Button>
       </div>
       <div>
-        <Button warning>Danger</Button>
+        <Button warning>Warning</Button>
       </div>
       <div>
         <Button secondary outline>
-          Outlined
+          secondary outline
         </Button>
       </div>
       <div>
         <Button secondary rounded>
-          Rounded
+          secondary rounded
         </Button>
       </div>
       <div>
-        <Button primary>Rounded</Button>
+        <Button primary>primary button</Button>
       </div>
     </div>
   );
