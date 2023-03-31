@@ -2,12 +2,12 @@ import { useState } from "react";
 
 function Accordion({ items }) {
   const [show, setShow] = useState(false);
-  const showItem = (item) => {
-    console.log(item.id);
+  const showItem = (items) => {
+    setShow(!show);
   };
   const renderedContent = items.map((item) => {
     return (
-      <div onClick={() => showItem(item)} key={item.id}>
+      <div key={item.id} onClick={showItem}>
         <div>{item.title}</div>
         {show && <div>{item.content}</div>}
       </div>
