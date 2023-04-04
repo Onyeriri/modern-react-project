@@ -1,30 +1,14 @@
-import Accordion from "./components/Accordion";
+import DropDown from "./components/DropDown";
 
 function App() {
-  const items = [
-    {
-      id: "jkl",
-      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
-      content:
-        "Quibusdam dolores veniam commodi dolor? Consequatur cumque sit adipisci molestiae quibusdam. Blanditiis animi voluptas unde vitae odit nesciunt possimus quaerat in culpa!",
-    },
-    {
-      id: "jklp",
-      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
-      content:
-        "Quibusdam dolores veniam commodi dolor? Consequatur cumque sit adipisci molestiae quibusdam. Blanditiis animi voluptas unde vitae odit nesciunt possimus quaerat in culpa!",
-    },
-    {
-      id: "jkld",
-      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
-      content:
-        "Quibusdam dolores veniam commodi dolor? Consequatur cumque sit adipisci molestiae quibusdam. Blanditiis animi voluptas unde vitae odit nesciunt possimus quaerat in culpa!",
-    },
+  const options = [
+    { label: "Green", value: "green" },
+    { label: "Red", value: "red" },
+    { label: "Blue", value: "blue" },
   ];
-
   return (
     <div>
-      <Accordion items={items} />
+      <DropDown options={options} />
     </div>
   );
 }
