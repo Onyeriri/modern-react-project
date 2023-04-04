@@ -17,11 +17,13 @@ function Accordion({ items }) {
         <div
           className="border border-3 p-3 flex justify-between align-center bg-gray-50 items-center"
           onClick={() => {
-            if (isExpanded) {
-              setExpanded(-1);
-            } else {
-              setExpanded(item.id);
-            }
+            setExpanded((prevState) => {
+              if (prevState === item.id) {
+                return -1;
+              } else {
+                return item.id;
+              }
+            });
           }}
         >
           {item.title} {icons}
