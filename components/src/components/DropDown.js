@@ -4,12 +4,15 @@ import { GoChevronDown, GoChevronLeft } from "react-icons/go";
 function DropDown({ options }) {
   const [selected, setSelected] = useState(options[0].label);
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState(options[0].value);
+  // const [value, setValue] = useState(options[0].value);
 
   const handleClick = (selectedValue, selectedLabel) => {
     setSelected(selectedLabel);
-    setValue(selectedValue);
+    // setValue(selectedValue);
+    setIsOpen((currentState) => !currentState);
   };
+
+  // console.log(value);
 
   const icons = (
     <span className="text-3xl">
