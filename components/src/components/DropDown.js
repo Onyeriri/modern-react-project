@@ -7,7 +7,6 @@ function DropDown({ options }) {
   const [value, setValue] = useState(options[0].value);
 
   const handleClick = (selectedValue, selectedLabel) => {
-    console.log(selectedValue);
     setSelected(selectedLabel);
     setValue(selectedValue);
   };
@@ -19,7 +18,7 @@ function DropDown({ options }) {
   );
 
   const handleOpen = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((currentState) => !currentState);
   };
 
   const displayOptions = options.map((option, index) => (
