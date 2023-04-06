@@ -13,13 +13,10 @@ function App() {
     { label: "Red", value: "red" },
     { label: "Blue", value: "blue" },
   ];
+
   return (
     <div>
-      <DropDown
-        options={options}
-        onSelect={handleSelected}
-        selected={selected}
-      />
+      <DropDown options={options} onChange={handleSelected} value={selected} />
     </div>
   );
 }
