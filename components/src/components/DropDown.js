@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { GoChevronDown, GoChevronLeft } from "react-icons/go";
+import Panel from "./Panel";
 
-function DropDown({ options, selected, onSelect }) {
+function DropDown({ options, value, onChange }) {
   // const [selected, setSelected] = useState(options[0].label);
   const [isOpen, setIsOpen] = useState(false);
   // const [value, setValue] = useState(options[0].value);
 
   const handleClick = (selectedValue) => {
-    onSelect(selectedValue);
+    onChange(selectedValue);
     setIsOpen((currentState) => !currentState);
   };
 
@@ -33,20 +34,20 @@ function DropDown({ options, selected, onSelect }) {
     </option>
   ));
 
-  let content = selected ? selected : <div>Select...</div>;
+  let content = value || <div>Select...</div>;
 
   return (
     <div>
-      <div
+      <Panel
         onClick={handleOpen}
         className="p-3 border border-gray-300 bg-gray-300 flex align-center justify-between"
       >
         {content} {icons}
-      </div>
+      </Panel>
       {isOpen && (
-        <div className="p-2 cursor-pointer border border-gray-300">
+        <Panel className="p-2 cursor-pointer border border-gray-300">
           {displayOptions}
-        </div>
+        </Panel>
       )}
     </div>
   );
